@@ -13,9 +13,10 @@ dotenv.config();
 
 /* 
     Body Parser - deprecated 
-    app.use(bodyParser.json({ limit: "30mb", extended: true }));
-    app.use(bodyParser.json({ limit: "30mb", extended: true }));
+    app.use(bodyParser.json());
+    app.use(bodyParser.json());
 */
+
 // Updated Code
 app.use(express.json());
 app.use(express.urlencoded());
@@ -25,19 +26,22 @@ app.use(cors());
 // app.use('/posts', postRoutes);
 // app.use('/user', userRoutes);
 
-app.get('/', (req, res) => {
-  res.send('This is the PhotoDiary API!');
-});
+const CONNECTION_URL =
+  'mongodb+srv://diygrooming:diygrooming1212@cluster0.errlv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
+
+// app.get('/', (req, res) => {
+//   res.send('This is the PhotoDiary API!');
+// });
 
 // { useNewUrlParser: true, useUnifiedTopology: true } --> Deprecated
 
-// mongoose
-//   .connect(process.env.CONNECTION_URL)
-//   .then(() =>
-//     app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`)),
-//   )
-//   .catch((error) => console.log(error.message));
+mongoose
+  .connect(CONNECTION_URL)
+  .then(() =>
+    app.listen(PORT, () => console.log(`Server is running! PORT: ${PORT}`)),
+  )
+  .catch((error) => console.log(error));
 
 // mongoose.set("useFindAndModify", false); --> Deprecated
