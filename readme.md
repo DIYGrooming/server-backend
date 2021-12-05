@@ -3,6 +3,7 @@
 T3A2-B MERN Full-stack App
 
 Setup:
+
 `node version v16.13.0 (lts version)`
 
 To update:
@@ -10,6 +11,11 @@ To update:
 - `nvm use --lts`
 
 `npm version 8.1.0`
+
+Once cloned, run:
+```
+npm install
+```
 
 ---
 
