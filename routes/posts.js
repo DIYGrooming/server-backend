@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { getPosts } from '../controllers/posts.js';
+import { getPosts, createPost } from '../controllers/posts.js';
 
 // Auth Middleware
 // Auth is applied for creating Post.
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', getPosts);
 
-// router.post('/', auth, createPost);
+router.post('/', createPost);
 
 // router.patch('/:id', auth, updatePost);
 

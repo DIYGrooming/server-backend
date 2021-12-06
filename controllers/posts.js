@@ -13,3 +13,23 @@ export const getPosts = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+export const createPost = (req, res) => {
+  const post = req.body;
+
+  // const newPost = new PostContent({
+  //   ...post,
+  //   creator: req.userId,
+  //   createdAt: new Date().toISOString(),
+  // });
+
+  const newPost = new PostContent(post);
+
+  try {
+    await newPost.save();
+
+    res.status(201).json(newPost);
+  } catch (error) {
+    res.status(409).json({ message: error });
+  }
+};
