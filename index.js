@@ -5,7 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 // Custom Built Routes
-// import postRoutes from './routes/posts.js';
+import postRoutes from './routes/posts.js';
 // import userRoutes from './routes/user.js';
 
 const app = express();
@@ -23,7 +23,7 @@ app.use(express.urlencoded());
 app.use(cors());
 
 // The Custom Defined Routes
-// app.use('/posts', postRoutes);
+app.use('/posts', postRoutes);
 // app.use('/user', userRoutes);
 
 const CONNECTION_URL =
