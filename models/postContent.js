@@ -4,6 +4,7 @@ const postSchema = mongoose.Schema({
   title: String,
   body: String,
   name: String,
+  videoLink: String,
   creator: String,
   tags: [String],
   selectedFile: String,
