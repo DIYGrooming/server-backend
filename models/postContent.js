@@ -2,10 +2,17 @@ import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema({
   title: String,
-  body: String,
-  name: String,
+  breed: String,
+  dogSize: String,
+  description: String,
+  video: String,
   creator: String,
+  steps: [String],
   tags: [String],
+  image: {
+    before: String,
+    after: String,
+  },
   selectedFile: String,
   comments: {
     type: [String],
