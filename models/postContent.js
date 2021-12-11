@@ -4,7 +4,6 @@ const postSchema = mongoose.Schema({
   title: String,
   breed: String,
   dogSize: String,
-  body: String,
   description: String,
   video: String,
   creator: String,
