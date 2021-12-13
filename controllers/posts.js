@@ -33,3 +33,21 @@ export const createPost = async (req, res) => {
     res.status(409).json({ message: error });
   }
 };
+
+export const updatePost = async (req, res) => {
+  const { id: _id } = req.params;
+
+  const post = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('There are no blogs with that ID');
+  }
+
+  const updatedPost = await PostContent.findByIdAndUpdate(
+    _id,
+    { ...post, _id },
+    { new: true },
+  );
+
+  res.json(updatedPost);
+};
