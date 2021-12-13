@@ -34,7 +34,9 @@ export const createPost = async (req, res) => {
   }
 };
 
+// Update a Post
 export const updatePost = async (req, res) => {
+  // Get the ID
   const { id: _id } = req.params;
 
   const post = req.body;
@@ -50,4 +52,20 @@ export const updatePost = async (req, res) => {
   );
 
   res.json(updatedPost);
+};
+
+// Delete A Post
+export const deletePost = async (req, res) => {
+  // Get the ID
+  const { id } = req.params;
+
+  // Make sure that given ID is valid like updatePost.
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No post with that id...');
+  }
+
+  // Don't need data back. If Id exists, it's deleted.
+  const deletedToken = await PostMessage.findByIdAndRemove(id);
+
+  res.json(deletedToken, { message: 'Posts Deleted Successfully' });
 };
