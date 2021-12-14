@@ -1,6 +1,11 @@
 import express from 'express';
 
-import { getPosts, createPost, updatePost } from '../controllers/posts.js';
+import {
+  getPosts,
+  createPost,
+  updatePost,
+  deletePost,
+} from '../controllers/posts.js';
 
 // Auth Middleware
 // Auth is applied for creating Post.
@@ -14,7 +19,7 @@ router.post('/', createPost);
 
 router.patch('/:id', updatePost);
 
-// router.delete('/:id', auth, deletePost);
+router.delete('/:id', deletePost);
 
 // router.patch('/:id/likePost', auth, likePost);
 
