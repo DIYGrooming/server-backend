@@ -13,6 +13,8 @@ export const signin = async (req, res) => {
   try {
     // Get the User from database with the provided Email.
     const existingUser = await User.findOne({ email });
+
+    // If they do not exist, send a response.
     if (!existingUser) {
       return res.status(404).json({ message: 'User Does Not Exist!' });
     }
@@ -27,7 +29,6 @@ export const signin = async (req, res) => {
     }
 
     // Send JSON Web token if correct credentials are entered.
-    // This 'test' is a secret key. Research how you can do better security by moving it to .env etc.
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser._id },
       secret,
@@ -57,7 +58,7 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: 'Email already in use.' });
     }
 
-    // Check if the passwords match.
+    // Check if the passwords match - should already match but this is an additional check.
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords do not match...' });
     }
