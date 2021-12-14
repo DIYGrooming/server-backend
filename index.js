@@ -26,9 +26,6 @@ app.use(cors());
 app.use('/posts', postRoutes);
 // app.use('/user', userRoutes);
 
-const CONNECTION_URL =
-  'mongodb+srv://diygrooming:diygrooming1212@cluster0.errlv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-
 const PORT = process.env.PORT || 5000;
 
 // app.get('/', (req, res) => {
@@ -38,7 +35,7 @@ const PORT = process.env.PORT || 5000;
 // { useNewUrlParser: true, useUnifiedTopology: true } --> Deprecated
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server is running! PORT: ${PORT}`)),
   )
