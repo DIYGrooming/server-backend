@@ -65,7 +65,7 @@ export const deletePost = async (req, res) => {
   }
 
   // Don't need data back. If Id exists, it's deleted.
-  const deletedToken = await PostMessage.findByIdAndRemove(id);
+  const deletedToken = await PostContent.findByIdAndRemove(id);
 
   res.json(deletedToken, { message: 'Posts Deleted Successfully' });
 };
@@ -84,7 +84,7 @@ export const likePost = async (req, res) => {
     return res.status(404).send('No post with that id...');
   }
   // Get the post
-  const post = await PostMessage.findById(id);
+  const post = await PostContent.findById(id);
 
   // LOGIC. If already liked, we are going unlike. Vice versa.
   // Check if the person already liked the post.
@@ -97,12 +97,10 @@ export const likePost = async (req, res) => {
     post.likes.push(req.userId);
   } else {
     // Unlike the post
-    post.likes = post.likes.filter((id) => {
-      id !== String(req.userId);
-    });
+    post.likes = post.likes.filter((id) => id !== String(req.userId));
   }
 
-  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+  const updatedPost = await PostContent.findByIdAndUpdate(id, post, {
     new: true,
   });
 
