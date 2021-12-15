@@ -39,9 +39,9 @@ export const signin = async (req, res) => {
   } catch (error) {
     console.log(error);
     // Send Error code 500 (Undefined server error);
-    res.status(500).json({
-      message: 'Something went wrong here (server/controllers/user.js)signIn',
-    });
+    // res.status(500).json({
+    //   message: 'Something went wrong here (server/controllers/user.js)signIn',
+    // });
   }
 };
 
@@ -86,8 +86,8 @@ export const signup = async (req, res) => {
     res.status(201).json({ result, token });
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      message: 'Something went wrong here (server/controllers/user.js)signUp',
-    });
+    // res.status(500).json({
+    //   message: 'Something went wrong here (server/controllers/user.js)signUp',
+    // });
   }
 };
