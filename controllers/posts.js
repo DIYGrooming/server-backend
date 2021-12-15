@@ -69,3 +69,42 @@ export const deletePost = async (req, res) => {
 
   res.json(deletedToken, { message: 'Posts Deleted Successfully' });
 };
+
+// Like a Post
+export const likePost = async (req, res) => {
+  const { id } = req.params;
+
+  // Req.userId is defined at middleware auth, at routes/posts
+  if (!req.userId) {
+    // If not defined, then user unauthenticated.
+    return res.json({ message: 'Unauthenticated' });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No post with that id...');
+  }
+  // Get the post
+  const post = await PostMessage.findById(id);
+
+  // LOGIC. If already liked, we are going unlike. Vice versa.
+  // Check if the person already liked the post.
+  const index = post.likes.findIndex((id) => {
+    id === String(req.userId);
+  });
+
+  if (index === -1) {
+    // Like the post
+    post.likes.push(req.userId);
+  } else {
+    // Unlike the post
+    post.likes = post.likes.filter((id) => {
+      id !== String(req.userId);
+    });
+  }
+
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+    new: true,
+  });
+
+  res.json(updatedPost);
+};

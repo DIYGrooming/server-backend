@@ -5,6 +5,7 @@ import {
   createPost,
   updatePost,
   deletePost,
+  likePost,
 } from '../controllers/posts.js';
 
 // Auth Middleware
@@ -21,6 +22,6 @@ router.patch('/:id', auth, updatePost);
 
 router.delete('/:id', auth, deletePost);
 
-// router.patch('/:id/likePost', auth, likePost);
+router.patch('/:id/likePost', auth, likePost);
 
 export default router;
