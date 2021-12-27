@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 import PostContent from '../models/postContent.js';
 
+// Fetch all posts
 export const getPosts = async (req, res) => {
   try {
     const postContent = await PostContent.find();
@@ -14,6 +15,17 @@ export const getPosts = async (req, res) => {
   }
 };
 
+// Fetch a single post
+export const getSinglePost = async (req, res) => {
+  try {
+    const post = await PostContent.findById(req.params.id);
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+// Create a new post
 export const createPost = async (req, res) => {
   const post = req.body;
 
