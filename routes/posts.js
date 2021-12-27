@@ -2,6 +2,7 @@ import express from 'express';
 
 import {
   getPosts,
+  getSinglePost,
   createPost,
   updatePost,
   deletePost,
@@ -15,6 +16,8 @@ import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/', getPosts);
+
+router.get('/:id', getSinglePost);
 
 router.post('/', auth, createPost);
 
