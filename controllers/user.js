@@ -16,7 +16,7 @@ export const signin = async (req, res) => {
 
     // If they do not exist, send a response.
     if (!existingUser) {
-      return res.status(404).json({ message: 'User Does Not Exist!' });
+      return res.status(200).json({ message: 'User Does Not Exist' });
     }
 
     // Check if password entered is correct using Bcrypt
@@ -25,7 +25,17 @@ export const signin = async (req, res) => {
       existingUser.password,
     );
     if (!validatePassword) {
-      return res.status(400).json({ message: 'Password does not match!' });
+      return res.status(200).json({ message: 'Wrong Password' });
+
+      /* 
+
+      // Keep the res 200 and work from there!
+          
+         
+      We need a better way to communicate to front end
+
+
+      */
     }
 
     // Send JSON Web token if correct credentials are entered.
@@ -38,16 +48,11 @@ export const signin = async (req, res) => {
     res.status(200).json({ result: existingUser, token });
   } catch (error) {
     console.log(error);
-    // Send Error code 500 (Undefined server error);
-    // res.status(500).json({
-    //   message: 'Something went wrong here (server/controllers/user.js)signIn',
-    // });
   }
 };
 
 export const signup = async (req, res) => {
   // Get information from body
-  // We don't do first and last name? hmmm
   const {
     email,
     password,
@@ -60,25 +65,18 @@ export const signup = async (req, res) => {
 
   try {
     // Check if user is already existing
-    console.log('SERVER BACKEND: Called in Sign Up.');
     const existingUser = await User.findOne({ email });
-
     if (existingUser) {
       return res.status(400).json({ message: 'Email already in use.' });
     }
 
-    // Check if the passwords match - should already match but this is an additional check.
+    // Check if the passwords match - should already match in frontend but this is an additional check.
     if (password !== confirmPassword) {
       return res.status(400).json({ message: 'Passwords do not match...' });
     }
 
     // Hash the password for security - second parameter is 'salt' - level of 'difficulty'. Usually 12.
     const hashedPassword = await bcrypt.hash(password, 12);
-
-    // console.log('Hashed Password:', hashedPassword);
-    // console.log('Email: ', email);
-    // console.log('Password: ', password);
-    // console.log('Username: ', password);
 
     // Create User
     const result = await User.create({
@@ -101,10 +99,5 @@ export const signup = async (req, res) => {
     res.status(201).json({ result, token });
   } catch (error) {
     console.log(error);
-    // res.status(500).json({
-    //   message: 'Something went wrong here (server/controllers/user.js)signUp',
-    // });
   }
 };
-
-// So I just gotta incldue the username, progroomer in teh USer.create stuff okay so obviosu.
