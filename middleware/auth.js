@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const secret = 'test';
 
+// Middleware will make sure all User required actions actually have Users.
 const auth = async (req, res, next) => {
   // We check if the user's token is valid.
   try {

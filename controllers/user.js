@@ -47,11 +47,20 @@ export const signin = async (req, res) => {
 
 export const signup = async (req, res) => {
   // Get information from body
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
+  // We don't do first and last name? hmmm
+  const {
+    email,
+    password,
+    confirmPassword,
+    username,
+    location,
+    proGroomer,
+    socMedia,
+  } = req.body;
 
   try {
     // Check if user is already existing
-    console.log('Called in Sign Up.');
+    console.log('SERVER BACKEND: Called in Sign Up.');
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -65,15 +74,20 @@ export const signup = async (req, res) => {
 
     // Hash the password for security - second parameter is 'salt' - level of 'difficulty'. Usually 12.
     const hashedPassword = await bcrypt.hash(password, 12);
-    console.log('Hashed Password:', hashedPassword);
-    console.log('Email: ', email);
-    console.log('Password: ', password);
+
+    // console.log('Hashed Password:', hashedPassword);
+    // console.log('Email: ', email);
+    // console.log('Password: ', password);
+    // console.log('Username: ', password);
 
     // Create User
     const result = await User.create({
       email,
       password: hashedPassword,
-      name: `${firstName} ${lastName}`,
+      username,
+      location,
+      proGroomer,
+      socMedia,
     });
     console.log('Result: ', result);
 
@@ -81,6 +95,7 @@ export const signup = async (req, res) => {
     const token = jwt.sign({ email: result.email, id: result._id }, secret, {
       expiresIn: '1h',
     });
+
     console.log('Token: ', token);
 
     res.status(201).json({ result, token });
@@ -91,3 +106,5 @@ export const signup = async (req, res) => {
     // });
   }
 };
+
+// So I just gotta incldue the username, progroomer in teh USer.create stuff okay so obviosu.
