@@ -2,10 +2,15 @@ import jwt from 'jsonwebtoken';
 
 const secret = 'test';
 
+// Middleware will make sure all User required actions actually have Users.
 const auth = async (req, res, next) => {
   // We check if the user's token is valid.
   try {
     // Grabbing the token from req.body
+    const isThereToken = req.headers.authorization;
+    if (!isThereToken) {
+      console.log('No User Token');
+    }
     const token = req.headers.authorization.split(' ')[1];
     const ourAuth = token.length < 500;
 
