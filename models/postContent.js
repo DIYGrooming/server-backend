@@ -8,7 +8,8 @@ const postSchema = mongoose.Schema({
   video: String,
   creator: String,
   steps: [String],
-  tags: [String],
+  tools: [String],
+  duration: String,
   image: {
     before: String,
     after: String,
