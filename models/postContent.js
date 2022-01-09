@@ -9,7 +9,6 @@ const postSchema = mongoose.Schema({
   description: String,
   video: String,
   username: String,
-  creator: String,
   steps: [String],
   tools: [String],
   duration: String,
@@ -17,7 +16,6 @@ const postSchema = mongoose.Schema({
     before: String,
     after: String,
   },
-  selectedFile: String,
   comments: {
     type: [String],
     default: [],
