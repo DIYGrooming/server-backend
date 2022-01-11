@@ -108,7 +108,7 @@ export const signup = async (req, res) => {
 // For User Profile
 import mongoose from 'mongoose';
 
-// Fetch all posts
+// Fetch all Users
 export const getUsers = async (req, res) => {
   try {
     const allUsers = await User.find();
@@ -121,7 +121,7 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// Fetch a single post
+// Fetch a single User
 export const getSingleUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -131,7 +131,7 @@ export const getSingleUser = async (req, res) => {
   }
 };
 
-// Update a Post
+// Update a User
 export const updateUser = async (req, res) => {
   // Get the ID
   const { id: _id } = req.params;
@@ -151,7 +151,7 @@ export const updateUser = async (req, res) => {
   res.json(updatedUser);
 };
 
-// Delete A Post
+// Delete A User
 export const deleteUser = async (req, res) => {
   // Get the ID
   const { id } = req.params;
