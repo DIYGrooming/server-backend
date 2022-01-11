@@ -11,6 +11,7 @@ const auth = async (req, res, next) => {
     if (!isThereToken) {
       console.log('No User Token');
     }
+
     const token = req.headers.authorization.split(' ')[1];
     const ourAuth = token.length < 500;
 

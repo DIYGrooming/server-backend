@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 const secret = 'test';
-
 export const signin = async (req, res) => {
   // Get the Email and Password from body.
   const { email, password } = req.body;
@@ -100,4 +99,70 @@ export const signup = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+/*
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+*/
+
+// For User Profile
+import mongoose from 'mongoose';
+
+// Fetch all Users
+export const getUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find();
+
+    console.log(allUsers);
+
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+// Fetch a single User
+export const getSingleUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+// Update a User
+export const updateUser = async (req, res) => {
+  // Get the ID
+  const { id: _id } = req.params;
+
+  const user = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send('There is not a User with that ID');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { ...user, _id },
+    { new: true },
+  );
+
+  res.json(updatedUser);
+};
+
+// Delete A User
+export const deleteUser = async (req, res) => {
+  // Get the ID
+  const { id } = req.params;
+
+  // Make sure that given ID is valid like updatePost.
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).send('No user with that id...');
+  }
+
+  // Don't need data back. If Id exists, it's deleted.
+  const deletedToken = await User.findByIdAndRemove(id);
+
+  res.json(deletedToken, { message: 'Posts Deleted Successfully' });
 };
