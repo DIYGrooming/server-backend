@@ -108,7 +108,6 @@ export const signup = async (req, res) => {
 // For User Profile
 import mongoose from 'mongoose';
 
-import User from '../models/user.js';
 // Fetch all posts
 export const getUsers = async (req, res) => {
   try {
