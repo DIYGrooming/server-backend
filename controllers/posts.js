@@ -15,6 +15,18 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (req, res) => {
+  const { searchQuery } = req.query;
+
+  try {
+    const title = new RegExp(searchQuery, 'i'); // Ignores all cases.
+    const posts = await PostContent.find({ title });
+    res.json({ posts });
+  } catch (error) {
+    res.status(404).json({ message: 'Error at getPostsBySearch', error });
+  }
+};
+
 // Fetch a single post
 export const getSinglePost = async (req, res) => {
   try {
