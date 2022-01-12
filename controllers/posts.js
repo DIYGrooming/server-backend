@@ -40,11 +40,7 @@ export const getSinglePost = async (req, res) => {
 // Create a new post
 export const createPost = async (req, res) => {
   const post = req.body;
-  // const newPost = new PostContent({
-  //   ...post,
-  //   creator: req.userId,
-  //   createdAt: new Date().toISOString(),
-  // });
+
   const newPost = new PostContent({
     ...post,
     creator: req.userId,
