@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
   description: String,
   video: String,
   username: String,
-  steps: [String],
+  steps: [Object],
   tools: [String],
   duration: String,
   image: {

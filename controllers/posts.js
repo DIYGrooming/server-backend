@@ -44,8 +44,11 @@ export const createPost = async (req, res) => {
   const newPost = new PostContent({
     ...post,
     creator: req.userId,
-    createdAt: new Date().toISOString(),
+    // createdAt: new Date().toISOString(),
   });
+  // createdAt: above is not necessary, as mongoDB automatically creates it
+
+  console.log('--- newPost:', newPost);
 
   try {
     await newPost.save();
