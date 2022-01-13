@@ -4,12 +4,26 @@ import PostContent from '../models/postContent.js';
 
 // Fetch all posts
 export const getPosts = async (req, res) => {
+  const { page } = req.query;
+
   try {
-    const postContent = await PostContent.find();
+    // Pagination boundaries.
+    // How many do we want per Page
+    const LIMIT = 6;
+    const startIndex = (Number(page) - 1) * LIMIT;
+    // Count the total number of posts in entirety of MongoDB
+    const total = await PostContent.countDocuments({});
+    // Posts will be sorted by newest to oldest.
+    const posts = await PostContent.find()
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
 
-    console.log(postContent);
-
-    res.status(200).json(postContent);
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
     res.status(404).json({ message: error });
   }
@@ -26,8 +40,6 @@ export const getPostsBySearch = async (req, res) => {
     } else {
       res.status(200).json({ message: 'No Results' });
     }
-
-    // If you finf the posts, send it, if not, send a msg sayin gno posts found!
   } catch (error) {
     res.status(404).json({ message: 'Error at getPostsBySearch', error });
   }
