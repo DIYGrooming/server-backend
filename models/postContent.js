@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-// !TODO - 'tags' to be changed to 'tools'
-
 const postSchema = mongoose.Schema({
   title: String,
   breed: String,
@@ -9,7 +7,7 @@ const postSchema = mongoose.Schema({
   description: String,
   video: String,
   username: String,
-  steps: [String],
+  steps: [Object],
   tools: [String],
   duration: String,
   image: {
