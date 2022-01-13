@@ -21,7 +21,13 @@ export const getPostsBySearch = async (req, res) => {
   try {
     const title = new RegExp(searchQuery, 'i'); // Ignores all cases.
     const posts = await PostContent.find({ title });
-    res.json({ posts });
+    if (posts.length > 0) {
+      res.status(200).json({ posts });
+    } else {
+      res.status(200).json({ message: 'No Results' });
+    }
+
+    // If you finf the posts, send it, if not, send a msg sayin gno posts found!
   } catch (error) {
     res.status(404).json({ message: 'Error at getPostsBySearch', error });
   }
