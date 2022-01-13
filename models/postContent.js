@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-// !TODO - 'tags' to be changed to 'tools'
-
 const postSchema = mongoose.Schema({
   title: String,
   breed: String,
