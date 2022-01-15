@@ -27,13 +27,8 @@ export const signin = async (req, res) => {
       return res.status(200).json({ message: 'Wrong Password' });
 
       /* 
-
       // Keep the res 200 and work from there!
-          
-         
       We need a better way to communicate to front end
-
-
       */
     }
 
