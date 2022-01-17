@@ -25,11 +25,6 @@ export const signin = async (req, res) => {
     );
     if (!validatePassword) {
       return res.status(200).json({ message: 'Wrong Password' });
-
-      /* 
-      // Keep the res 200 and work from there!
-      We need a better way to communicate to front end
-      */
     }
 
     // Send JSON Web token if correct credentials are entered.
