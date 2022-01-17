@@ -1,21 +1,6 @@
 # DIY Grooming Blog – Server-Backend
 
-T3A2-B MERN Full-stack App
-
-Setup:
-
-`node version v16.13.0 (lts version)`
-
-To update:
-- `nvm install --lts`
-- `nvm use --lts`
-
-`npm version 8.1.0`
-
-Once cloned, run:
-```
-npm install
-```
+**T3A2-B MERN Full-stack App**
 
 ---
 
@@ -29,3 +14,7 @@ npm install
 - Thang Za Thang → [GitHub](https://github.com/thangzathang)
 
 ---
+
+### Please refer to the following repo for information:
+
+👉🏻  [**DIYGrooming – Frontend**](https://github.com/DIYGrooming/client-frontend) 
