@@ -32,10 +32,6 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-// app.get('/', (req, res) => {
-//   res.send('This is the PhotoDiary API!');
-// });
-
 // { useNewUrlParser: true, useUnifiedTopology: true } --> Deprecated
 
 mongoose
