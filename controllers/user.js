@@ -122,7 +122,7 @@ export const getSingleUser = async (req, res) => {
     const user = await User.findById(req.params.id);
     res.status(200).json(user);
   } catch (error) {
-    res.status(404).json({ message: error });
+    console.log(error);
   }
 };
 
