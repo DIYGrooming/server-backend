@@ -26,6 +26,10 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req, res) => {
+  res.send('This is the DIY-Grooming API!');
+});
+
 const PORT = process.env.PORT || 5000;
 
 // app.get('/', (req, res) => {
