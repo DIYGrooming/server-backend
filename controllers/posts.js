@@ -9,7 +9,7 @@ export const getPosts = async (req, res) => {
   try {
     // Pagination boundaries.
     // How many do we want per Page
-    const LIMIT = 9;
+    const LIMIT = 6;
     const startIndex = (Number(page) - 1) * LIMIT;
     // Count the total number of posts in entirety of MongoDB
     const total = await PostContent.countDocuments({});
