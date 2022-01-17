@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start": "nodemon index.js",
     "dev": "nodemon src/index.js",
     "test": "jest",
     "format": "prettier \"src/**/*.{js,html}\" --write"
