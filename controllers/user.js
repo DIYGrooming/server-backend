@@ -118,11 +118,17 @@ export const getUsers = async (req, res) => {
 
 // Fetch a single User
 export const getSingleUser = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(206).send('There is not a User with that ID');
+  }
+
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(id);
     res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    console.log('getSingleUser error:', error);
   }
 };
 
